@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JMSSender {
-	
-	  
-	
-	  
-	
 	  
 	  @Autowired
 	  private JmsTemplate jmsTemplate;
 	    
 	    
+	  
+	  public void setJmsTemplate(JmsTemplate jmsTemplate) {
+		          this.jmsTemplate = jmsTemplate;
+		 	    }
+
 	  /**
 	   * send text to default destination
 	   * @param text
@@ -33,7 +33,7 @@ public class JMSSender {
 	      public Message createMessage(Session session) throws JMSException {
 	        Message message = session.createTextMessage(text);     
 	        //set ReplyTo header of Message, pretty much like the concept of email.
-	        message.setJMSReplyTo(new ActiveMQQueue("Recv2Send"));
+	        message.setJMSReplyTo(new ActiveMQQueue("FirstTestQueue"));
 	        return message;
 	      }
 	    });
